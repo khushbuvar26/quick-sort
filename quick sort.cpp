@@ -1,6 +1,70 @@
 #include<iostream>
 using namespace std;
-
+#include<iostream>
+using namespace std;
+int partition(int *ap, int lb, int ub)
+{
+	int pivot,i,j,temp;
+	pivot = ap[lb];
+	i = lb;
+	j = ub;
+	while(i<j)
+	{
+		while((ap[i]<=pivot)&&(i<j))
+		i++;
+		while((ap[j]>pivot))
+		j--;
+		if(i<j)
+		{
+			temp = ap[i];
+			ap[i] = ap[j];
+			ap[j] = temp;
+		}
+	}
+	ap[lb] = ap[j];
+	ap[j] = pivot;
+	return j;
+}
+int partition(int *am, int lb, int ub)
+{
+	int temp,pivot,i,j;
+	int m;
+	i=lb;
+	j=ub;
+	m= i+(j-i)/2;
+	if(((am[i]<=am[m])&&(am[m]<=am[j]))||((am[j]<=am[m])&&(am[m]<=am[i])))
+	{
+		temp = am[m];
+		am[m]=am[i];
+		am[i] = temp;
+	}
+	else if(((am[m]<=am[i])&&(am[i]<=am[j]))||((am[j]<=am[i])&&(am[i]<=am[m])))
+	{
+	}
+	else
+	{
+		temp = am[j];
+		am[j]=am[i];
+		am[i] = temp;
+	}
+	pivot = am[lb];
+	while(i<j)
+	{
+		while((am[i]<=pivot)&&(i<j))
+		i++;
+		while(am[j]>pivot)
+		j--;
+		if(i<j)
+		{
+			temp = am[i];
+			am[i] = am[j];
+			am[j] = temp;
+		}
+	}
+	am[lb] = am[j];
+	am[j] = pivot;
+	return j;
+}
 int partition(int *ap, int lb, int ub)
 {
 	int pivot,i,j,temp;
